@@ -1,0 +1,76 @@
+table.data-grid {
+  table-layout: fixed;
+  border-collapse: collapse;
+
+} 
+
+table.data-grid td.cell.updated {
+    background-color: rgba(0, 145, 253, 0.16);
+    transition : background-color 0ms ease ;
+}
+table.data-grid td.cell {
+  height: 25px;
+  width:  100px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  cursor: cell;
+  background-color: unset;
+  transition : background-color 500ms ease;
+  vertical-align: middle;
+  text-align: left;
+  border: 1px solid green;
+  padding: 1;
+}
+table.data-grid td.cell.selected {
+
+  border: 1px double rgb(33, 133, 208);
+  transition: none;
+}
+table.data-grid td.cell.selected {
+  box-shadow: inset 0 -100px 0 rgba(33, 133, 208, 0.15);
+}
+
+table.data-grid td.cell.read-only {
+  background: whitesmoke;
+  color: black;
+  font-weight: bold;
+  /*background-color:grey;*/
+  text-align: left;
+}
+
+table.data-grid td.cell > div.text {
+  padding: 2px 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+table.data-grid td.cell > input {
+  outline: none !important;
+  border: 2px solid rgb(33, 133, 208);
+  text-align:left;
+  width: calc(100% - 6px);
+  height: 32px;
+  background: none;
+}
+
+
+.left-panel {
+        background-color:white;
+        width: 20%;
+        height: auto;
+        float: left;
+    }
+
+.right-panel {
+        background-color: white;
+        width: 80%;
+        height:auto;
+        float: left;
+    }
+
+
+
+    
