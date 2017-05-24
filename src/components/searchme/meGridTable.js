@@ -187,33 +187,33 @@ class MeGridTable extends Component {
     return(<div id="table-container">
          <Table striped bordered condensed hover>
             <thead>
-              <tr style={{height:'20px'}} >
+              <tr style={{height:'5%'}} >
                 {/*<th id="hashcol"/>*/}
-                <th >ID <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.codesortableGlyph} id="ID"/></Button></th>
-                <th>Live <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.textsortableGlyph} id="Live"/></Button></th>
-                <th>Title <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Title"><Glyphicon glyph={this.state.groupingsortableGlyph} id="Title"/></Button></th>                
-                <th>Status <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="status"><Glyphicon glyph={this.state.classificationsortableGlyph} id="status"/></Button></th>
-                <th>Sev <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Sev"><Glyphicon glyph={this.state.specializationsortableGlyph} id="Sev"/></Button></th>
-                <th>ME Type <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="METype"><Glyphicon glyph={this.state.specializationsortableGlyph} id="METype"/></Button></th>
-                <th>Prod Ready <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="ProdReady"><Glyphicon glyph={this.state.specializationsortableGlyph} id="ProdReady"/></Button></th>
-                <th>Last Edited <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="LastEdited"><Glyphicon glyph={this.state.specializationsortableGlyph} id="LastEdited"/></Button></th>
-                <th>Tasks <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Tasks"><Glyphicon glyph={this.state.specializationsortableGlyph} id="Tasks"/></Button></th>
+                <th style={{width:'4%' }}>ID <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.codesortableGlyph} id="ID"/></Button></th>
+                <th style={{width:'5%' }}>Live <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.textsortableGlyph} id="Live"/></Button></th>
+                <th style={{width:'10%' }}>Title <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Title"><Glyphicon glyph={this.state.groupingsortableGlyph} id="Title"/></Button></th>                
+                <th style={{width:'5%' }}>Status <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="status"><Glyphicon glyph={this.state.classificationsortableGlyph} id="status"/></Button></th>
+                <th style={{width:'4%' }}>Sev <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Sev"><Glyphicon glyph={this.state.specializationsortableGlyph} id="Sev"/></Button></th>
+                <th style={{width:'6%' }}>ME Type <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="METype"><Glyphicon glyph={this.state.specializationsortableGlyph} id="METype"/></Button></th>
+                <th style={{width:'7%' }}>Prod Ready <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="ProdReady"><Glyphicon glyph={this.state.specializationsortableGlyph} id="ProdReady"/></Button></th>
+                <th style={{width:'7%' }}>Last Edited <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="LastEdited"><Glyphicon glyph={this.state.specializationsortableGlyph} id="LastEdited"/></Button></th>
+                <th style={{width:'5%' }}>Tasks <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Tasks"><Glyphicon glyph={this.state.specializationsortableGlyph} id="Tasks"/></Button></th>
               </tr>
             </thead>
             <tbody>
                 { this.state.personData &&
                   this.state.personData.map((person, idx) =>                   
-                    <tr key={idx} style={{height:'15%' }} >
+                    <tr key={idx} style={{height:'2%' }} >
                       {/*<td id="hashcol" style={{width:'5%' }}>{idx+1}</td>*/}
-                      <td style={{width:'5%' }}>{person.ID}</td>
-                      <td>{person.Live}</td>
-                      <td>{person.Title}</td>
-                      <td>{person.Status}</td>
-                      <td>{person.Sev}</td>
-                      <td>{person.METype}</td>
-                      <td>{person.ProdReady}</td>
-                      <td>{person.LastEdited}</td>
-                      <td>{person.Tasks}</td>
+                      <td style={{width:'4%' }}>{person.ID}</td>
+                      <td style={{width:'5%' }}>{person.Live}</td>
+                      <td style={{width:'10%' }}>{person.Title}</td>
+                      <td style={{width:'5%' }}>{person.Status}</td>
+                      <td style={{width:'4%' }}>{person.Sev}</td>
+                      <td style={{width:'6%' }}>{person.METype}</td>
+                      <td style={{width:'7%' }}>{person.ProdReady}</td>
+                      <td style={{width:'7%' }}>{person.LastEdited}</td>
+                      <td style={{width:'5%' }}>{person.Tasks}</td>
                     </tr>
                   )
                 }

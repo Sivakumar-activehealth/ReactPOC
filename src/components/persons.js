@@ -15,7 +15,7 @@ import Alert from 'react-bootstrap/lib/Alert';
 import Label from 'react-bootstrap/lib/Label';
 import * as personActions from "../actions/personActions";
 import personStore from "../stores/personStore";
-
+import ExportExcel from "./test";
 const collapseUpText="glyphicon glyphicon-menu-up";
 const collapseDownText="glyphicon glyphicon-menu-down";
 const sortedTextAscending = "glyphicon glyphicon-sort-by-alphabet";
@@ -42,14 +42,14 @@ class Persons extends Component {
         sortColumn:"code",
         dataCount:returnValues.pageCountField,
         totalCount:returnValues.totalCountField,
-        dataUrl: this.props.Source,
+        dataUrl:'http://localhost:3001/persons/?type=json', //this.props.Source,
         text:"",
         code:"",
         grouping:"",
         classification:"",
         specialization:"",
         apiUrl:"",
-        onSortParams:""
+        onSortParams:"",
       };
       //const personUrl= this.props.Source;
       console.log(this.state.dataUrl);
@@ -59,12 +59,12 @@ class Persons extends Component {
     }
     componentWillMount() {
       personStore.on("change", this.storeDataHandler.bind(this));
-      this.setState({dataUrl:'http://localhost:3001/persons/'});
+      this.setState({dataUrl:'http://localhost:3001/persons/?type=json',activePage:1,pageLimit:20});
     }
 
     componentWillUnmount() {
       personStore.removeListener("change", this.storeDataHandler);
-      this.setState({dataUrl:'http://localhost:3001/persons/'});
+      this.setState({dataUrl:'http://localhost:3001/persons/?type=json'});
     }
     
     openModal () { console.log('msg'); this.setState({open: true}); }
@@ -74,7 +74,6 @@ class Persons extends Component {
     openSearchScreen(){
       this.openModal();
     }
-
     searchResults(e){
       let offset;   
       console.log(typeof e);
@@ -218,27 +217,28 @@ class Persons extends Component {
         </div>
       <br/>
       <div id="table-container">
+        <ExportExcel />
          <Table striped bordered condensed hover>
             <thead>
               <tr>
-                <th id="hashcol"/>
-                <th>Person Id <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.codesortableGlyph} id="PERSONID"/></Button></th>
-                <th>First Name <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.textsortableGlyph} id="FIRSTNM"/></Button></th>
-                <th>Last Name <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="LASTNM"><Glyphicon glyph={this.state.groupingsortableGlyph} id="LASTNM"/></Button></th>                
-                <th>Email Address <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="EMAILADDRESS"><Glyphicon glyph={this.state.classificationsortableGlyph} id="EMAILADDRESS"/></Button></th>
-                <th>Last Modified <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="RECORDINSERTDT"><Glyphicon glyph={this.state.specializationsortableGlyph} id="RECORDINSERTDT"/></Button></th>
+                <th id="hashcol" style={{width:'2%' }}/>
+                <th style={{width:'5%' }}>Person Id <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.codesortableGlyph} id="PERSONID"/></Button></th>
+                <th style={{width:'5%' }}>First Name <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.textsortableGlyph} id="FIRSTNM"/></Button></th>
+                <th style={{width:'5%' }}>Last Name <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="LASTNM"><Glyphicon glyph={this.state.groupingsortableGlyph} id="LASTNM"/></Button></th>                
+                <th style={{width:'7%' }}>Email Address <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="EMAILADDRESS"><Glyphicon glyph={this.state.classificationsortableGlyph} id="EMAILADDRESS"/></Button></th>
+                <th style={{width:'5%' }}>Last Modified <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="RECORDINSERTDT"><Glyphicon glyph={this.state.specializationsortableGlyph} id="RECORDINSERTDT"/></Button></th>
               </tr>
             </thead>
             <tbody>
                 { this.state.personData &&
                   this.state.personData.map((person, idx) =>                   
                     <tr key={idx} style={{height:'15%' }}>
-                      <td id="hashcol" style={{width:'5%' }}>{idx+1}</td>
-                      <td>{person.PERSONID}</td>
-                      <td>{person.FIRSTNM}</td>
-                      <td>{person.LASTNM}</td>
-                      <td>{person.EMAILADDRESS}</td>
-                      <td>{person.RECORDINSERTDT}</td>
+                      <td id="hashcol" style={{width:'2%' }}>{idx+1}</td>
+                      <td style={{width:'5%' }}>{person.PERSONID}</td>
+                      <td style={{width:'5%' }}>{person.FIRSTNM}</td>
+                      <td style={{width:'5%' }}>{person.LASTNM}</td>
+                      <td style={{width:'7%' }}>{person.EMAILADDRESS}</td>
+                      <td style={{width:'5%' }}>{person.RECORDINSERTDT}</td>
                     </tr>
                   )
                 }
@@ -248,7 +248,8 @@ class Persons extends Component {
                     <tr>
                         <td colSpan="8">
                           <div>
-                            <Pagination bsSize="small" prev next first last ellipsis boundaryLinks items={this.state.totalCount>5?Math.ceil(this.state.totalCount/5):0} maxButtons={5} activePage={this.state.activePage} onSelect={this.handleSelect.bind(this)}/>
+                            {/*<Pagination bsSize="small" prev next first last ellipsis boundaryLinks items={this.state.totalCount>5?Math.ceil(this.state.totalCount/5):0} maxButtons={5} activePage={this.state.activePage} onSelect={this.handleSelect.bind(this)}/>*/}
+                              <Pagination bsSize="small" prev next first last ellipsis boundaryLinks items={this.state.totalCount>5?Math.ceil(this.state.totalCount/10):0} maxButtons={5} activePage={this.state.activePage} onSelect={this.handleSelect.bind(this)}/>
                           </div>
                         </td>                          
                     </tr>                                        

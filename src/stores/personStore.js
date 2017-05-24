@@ -9,13 +9,13 @@ class personsStore extends EventEmitter{
     
     constructor(){
         super();
-        //this.personData=[];
-        this.personData=[
-            {PERSONID:1,FIRSTNM:'test1',LASTNM:'test2',EMAILADDRESS:'ss@gmail.com',RECORDINSERTDT:'05/06/2017'},
-            {PERSONID:2,FIRSTNM:'test1',LASTNM:'test2',EMAILADDRESS:'ss@gmail.com',RECORDINSERTDT:'05/06/2017'},
-            {PERSONID:3,FIRSTNM:'test1',LASTNM:'test2',EMAILADDRESS:'ss@gmail.com',RECORDINSERTDT:'05/06/2017'},
-            {PERSONID:4,FIRSTNM:'test1',LASTNM:'test2',EMAILADDRESS:'ss@gmail.com',RECORDINSERTDT:'05/06/2017'}
-        ];
+        this.personData=[];
+        // this.personData=[
+        //     {PERSONID:1,FIRSTNM:'test1',LASTNM:'test2',EMAILADDRESS:'ss@gmail.com',RECORDINSERTDT:'05/06/2017'},
+        //     {PERSONID:2,FIRSTNM:'test1',LASTNM:'test2',EMAILADDRESS:'ss@gmail.com',RECORDINSERTDT:'05/06/2017'},
+        //     {PERSONID:3,FIRSTNM:'test1',LASTNM:'test2',EMAILADDRESS:'ss@gmail.com',RECORDINSERTDT:'05/06/2017'},
+        //     {PERSONID:4,FIRSTNM:'test1',LASTNM:'test2',EMAILADDRESS:'ss@gmail.com',RECORDINSERTDT:'05/06/2017'}
+        // ];
        
         this.dataCount = 0;
         this.totalCount = 0;

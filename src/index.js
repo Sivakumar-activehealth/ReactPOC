@@ -30,7 +30,7 @@ ReactDOM.render((
          <Route path = "providerdisplay" component = {ProviderDisplay}  />
          <Route path ="mesearch" component={Stepper} />
          <Route path ="datasheet" component={Datasheet} />
-         {/*<Route path ="test" component={Test} />*/}
+         <Route path ="test" component={Test} />
       </Route>
    </Router>
 	
