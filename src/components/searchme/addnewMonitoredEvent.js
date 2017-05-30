@@ -38,7 +38,7 @@ class AddnewMonitoredEvent extends Component {
         this.props.onchange('AddNewME',this.state.MeModel);
     }
     render() {
-      return(<div>
+      return(<div className="addnew">
        <div className="panel panel-default" >
                <div className="panel-heading">
                   <h3 className="panel-title">Add New Monitored Event </h3>

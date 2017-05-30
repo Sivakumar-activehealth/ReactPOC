@@ -15,9 +15,10 @@ import Alert from 'react-bootstrap/lib/Alert';
 import Label from 'react-bootstrap/lib/Label';
 import * as personActions from "../actions/personActions";
 import personStore from "../stores/personStore";
-import ExportExcel from "./test";
+import ExportExcel from "./export";
 const collapseUpText="glyphicon glyphicon-menu-up";
 const collapseDownText="glyphicon glyphicon-menu-down";
+const exportCollapseDownText="glyphicon glyphicon-menu-down";
 const sortedTextAscending = "glyphicon glyphicon-sort-by-alphabet";
 const sortedTextDescending = "glyphicon glyphicon-sort-by-alphabet-alt";
 const sortableText="glyphicon glyphicon-sort";
@@ -28,9 +29,12 @@ class Persons extends Component {
       let returnValues=personStore.getPersons();
       this.state={
         open: false,
+        isgridShow:false,
         alertVisible: false,
         collapseVisible: true,
+        exportCollapseVisible:false,
         collapseGlyph: collapseUpText,
+        exportCollapseGlyph: collapseUpText,
         codesortableGlyph: sortableText,
         textsortableGlyph: sortableText,
         groupingsortableGlyph:sortableText,
@@ -90,6 +94,7 @@ class Persons extends Component {
       let serverParams="?";      
       console.log('inside results click');
       this.getServerData(serverParams,offset,this.state.pageLimit,this.state.sortColumn);
+      this.setState({isgridShow:true});
     }
     getServerData(params,offset,limit,sortCol){
       let callParams = params;
@@ -107,6 +112,11 @@ class Persons extends Component {
       this.setState({ 
         collapseVisible: !this.state.collapseVisible,
         collapseGlyph: this.state.collapseVisible?collapseDownText: collapseUpText });
+    }
+    exportCollapseChange(e){
+      this.setState({ 
+        exportCollapseVisible: !this.state.exportCollapseVisible,
+        exportCollapseGlyph: this.state.exportCollapseVisible?exportCollapseDownText: collapseUpText });
     }
     handleSelect(eventKey) {
       console.log(eventKey);      
@@ -183,6 +193,7 @@ class Persons extends Component {
     }
   render() {
     let tooltip = <Tooltip id="tooltip">Collapse/Hide search results pane!</Tooltip>;
+    let exporttooltip = <Tooltip id="tooltip">Collapse/Hide export results pane!</Tooltip>;
     return (
       <div>
           <div className="glyphButton">            
@@ -191,7 +202,7 @@ class Persons extends Component {
                 <Glyphicon glyph={this.state.collapseGlyph} />
               </Button>
             </OverlayTrigger>
-          </div>      
+          </div>  
         <div>
         <Collapse in={this.state.collapseVisible}>
           <div>        
@@ -199,12 +210,12 @@ class Persons extends Component {
                 <FormGroup controlId="formInlineText">
                   <ControlLabel>First Name</ControlLabel>
                   {' '}
-                  <FormControl type="text" placeholder="Just a Text to showcase the possibility of a filter" bsSize="large"/>
+                  <FormControl type="text" placeholder="Just a Text to showcase the possibility of a filter" bsSize="small"/>
                   <ControlLabel>Last Name</ControlLabel>
                   {' '}
-                  <FormControl type="text" placeholder="Just another Text" bsSize="large"/>                  
+                  <FormControl type="text" placeholder="Just another Text" bsSize="small"/>                  
                   {' '}
-                </FormGroup>
+                </FormGroup> {' '}
                 <FormGroup controlId="formInlineButton">
                   <Button onClick={this.searchResults.bind(this)} value="0" bsStyle="primary">
                     Search Results
@@ -213,11 +224,26 @@ class Persons extends Component {
                 {' '}
               </Form>
             </div>
-          </Collapse>            
+          </Collapse>  
+          <br/>         
         </div>
-      <br/>
-      <div id="table-container">
-        <ExportExcel />
+        <div><br/>
+         <div className="glyphButton">            
+            <OverlayTrigger placement="bottom" overlay={exporttooltip}>
+              <Button onClick={this.exportCollapseChange.bind(this)}> 
+                <Glyphicon glyph={this.state.exportCollapseGlyph} />
+              </Button>
+            </OverlayTrigger>
+          </div> <br/>
+          <Collapse in={this.state.exportCollapseVisible}>
+              <div>  <br/>
+                   <ExportExcel />
+              </div>
+          </Collapse>
+        </div>
+      <br/> <br/>
+      {this.state.isgridShow &&
+        <div id="table-container">
          <Table striped bordered condensed hover>
             <thead>
               <tr>
@@ -257,6 +283,18 @@ class Persons extends Component {
         </Table>
             <Alert bsStyle="success"> Api call: <br/> <p><strong>{this.state.apiUrl}</strong></p></Alert>
         </div>
+      }
+      {!this.state.isgridShow &&
+       <div className="panel panel-default" style={{width:'80%'}} >
+               <div className="panel-heading">
+                  <h3 className="panel-title">Results </h3>
+               </div>
+               <div className="panel-body">
+     
+        <div className="col-md-3 col-md-offset-0" style={{width:'60%'}} >Use Search to populate 'Persons' details </div>
+        </div>
+         </div>
+      }
       </div>);
   }
 }

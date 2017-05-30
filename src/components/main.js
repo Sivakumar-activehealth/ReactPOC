@@ -23,7 +23,9 @@ class Main extends Component {
                                 <li><Link to="/search" activeClassName="active">ME Search</Link></li>
                                 <li><Link to="/addmonitored" activeClassName="active">ME LeftNav</Link></li>
                                 <li><Link to="/datasheet" activeClassName="active">DataSheet</Link></li>
-                                <li><Link to="/test" activeClassName="active">Export</Link></li>
+                                {/*<li><Link to="/export" activeClassName="active">Export</Link></li>*/}
+                                <li><Link to="/wizardstep" activeClassName="active">Wizardstep</Link></li>
+                                {/*<li><Link to="/test" activeClassName="active">Test</Link></li>*/}
                                 
                             </ul>
                         </div>

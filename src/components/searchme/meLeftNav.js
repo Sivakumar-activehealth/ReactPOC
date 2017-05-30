@@ -21,7 +21,8 @@ class MESearchLeftMenu extends Component {
       super(props);
        this.state = {
             mepage:1,
-            showModal:false
+            showModal:false,
+            isMax:false
       }
       this.onClickLeft =this.onClickLeft.bind(this);
       this.onClickNext =this.onClickNext.bind(this);

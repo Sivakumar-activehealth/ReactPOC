@@ -15,7 +15,9 @@ import ProviderDisplay from './components/searchme/providerDisplay';
 import AddNewMonitored from './components/searchme/addnewMonitoredEvent';
 import Stepper from './components/monitoredEvent';
 import Datasheet from './components/dataSheet';
-import Test from './components/test';
+import Export from './components/export';
+//import Test from './components/test';
+import WizardStepper from './components/examples/example';
 let messages = { name: " Adminsuite UI App", greeting: " Hello User!", modalState: true};
 injectTapEventPlugin();
 
@@ -30,7 +32,9 @@ ReactDOM.render((
          <Route path = "providerdisplay" component = {ProviderDisplay}  />
          <Route path ="mesearch" component={Stepper} />
          <Route path ="datasheet" component={Datasheet} />
-         <Route path ="test" component={Test} />
+         <Route path ="export" component={Export} />
+         <Route path ="wizardstep" component={WizardStepper} />
+         {/*<Route path ="test" component={Test} />*/}
       </Route>
    </Router>
 	

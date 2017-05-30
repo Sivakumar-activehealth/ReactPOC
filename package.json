@@ -9,11 +9,14 @@
     "cors": "^2.8.1",
     "express": "^4.15.2",
     "flux": "^3.1.2",
+    "joi": "^10.5.1",
+    "joi-validation-strategy": "^0.3.3",
     "json-diff-patch": "0.0.1",
     "lodash": "^4.17.4",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.17.0",
     "path": "^0.12.7",
+    "promise": "^7.1.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-bootstrap": "^0.30.7",
@@ -32,7 +35,8 @@
     "react-simple-tooltip": "^1.0.5",
     "react-stepper-horizontal": "^1.0.6",
     "react-svg-line-chart": "^1.0.5",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "react-validation-mixin": "^5.4.0"
   },
   "keywords": [
     "facebook",
