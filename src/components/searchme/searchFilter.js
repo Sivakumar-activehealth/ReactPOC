@@ -92,7 +92,7 @@ class Search extends Component {
   render() {
     let tooltip = <Tooltip id="tooltip">Collapse/Hide search results pane!</Tooltip>;
     return (
-      <div style={{backgroundColor:"FFFAFA"}}>
+      <div style={{backgroundColor:"fffafa"}}>
         <div>
           <Form inline>
               <FormGroup controlId="formInlineTxt">

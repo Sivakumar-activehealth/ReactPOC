@@ -68,7 +68,7 @@ class Export extends Component {
 	render () {
     const { selected } = this.state.selected;
 		return (
-			<div className="section"> 
+			<div className="section" style={{backgroundColor:"fffafa",width:'80%'}}> 
           <div className="container">        
             <div className="row"> 
               <div className="col-sm-1 col-md-1"> <ControlLabel >Title</ControlLabel>  </div>
