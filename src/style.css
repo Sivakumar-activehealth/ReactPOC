@@ -195,3 +195,20 @@ ol.progtrckr li.progtrckr-done:before {
 ol.progtrckr li.progtrckr-done:hover:before {
   color: #333;
 }
+.rdl-move .rdl-move-all .rdl-move-right{
+ background-color: #5cb85c;
+}
+/*
+.rdl-move-all{
+    width: 20px;
+}
+.rdl-move-right  {
+   background-color: #5cb85c;
+}
+.rdl-move-left  {
+   background-color:blue;
+   width: 70px,
+}*/
+/*rdl-move rdl-move-all rdl-move-right*/
+
+/*rdl-move rdl-move-right*/

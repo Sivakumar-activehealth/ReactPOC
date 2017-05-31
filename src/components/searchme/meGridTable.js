@@ -14,20 +14,19 @@ import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Alert from 'react-bootstrap/lib/Alert';
 import Label from 'react-bootstrap/lib/Label';
-import * as personActions from "../../actions/personActions";
-import personStore from "../../stores/personStore";
+import * as meActions from "../../actions/meActions";
+import meStore from "../../stores/meStore";
 import {MeGridData} from "../../shared/constants";
 const collapseUpText="glyphicon glyphicon-menu-up";
 const collapseDownText="glyphicon glyphicon-menu-down";
 const sortedTextAscending = "glyphicon glyphicon-sort-by-alphabet";
 const sortedTextDescending = "glyphicon glyphicon-sort-by-alphabet-alt";
 const sortableText="glyphicon glyphicon-sort";
-
+var $ = require ('jquery');
 class MeGridTable extends Component {  
     constructor (props) {           
       super(props);
-      let returnValues=personStore.getPersons();
-     
+      let returnValues=meStore.getMEdetails();
       this.state={
         searchName:this.props.searchName,
         searchtype:this.props.searchtype,
@@ -42,11 +41,11 @@ class MeGridTable extends Component {
         specializationsortableGlyph:sortableText,
         activePage: 1,
         pageLimit:5,
-        personData: MeGridData,
+        personData: returnValues,
         sortColumn:"code",
         dataCount:MeGridData.length,
         totalCount:100,
-        dataUrl: this.props.Source,
+        dataUrl: 'http://localhost:3001/monitored-events?offset=1&limit=5&type=json',
         text:"",
         code:"",
         grouping:"",
@@ -58,27 +57,43 @@ class MeGridTable extends Component {
 
       console.log(this.state.dataUrl);
      //      this.onSearchPerson=this.onSearchPerson.bind(this);
+     this.searchResults=this.searchResults.bind(this);
       console.log(this.state.codeSortColDesc);      
     }
  
-    componentWillMount() {
-      
-      var MeData=MeGridData;
-      if(this.props.searchName!=null & this.props.searchType=='1'){
-        var arr= MeData.filter((x=>x.ID==this.props.searchName));
-        this.setState({personData:arr});
-      }
-      if(this.props.searchName!=null & this.props.searchType=='2'){
-        // var arrs=[];
-        // MeData.map(function (step, index) {
-        //   var name=step;
-        // })
-        this.setState({personData:MeData});
-      }
-    }
-
+    componentWillMount() { 
+      //http://localhost:3001/monitored-events?offset=1&limit=5&type=json
+     
+      // if(this.props.searchName!=null & this.props.searchType=='1'){
+      //   var arr= MeData.filter((x=>x.ID==this.props.searchName));
+      //   this.setState({personData:arr});
+      // }
+      // if(this.props.searchName!=null & this.props.searchType=='2'){
+      //   this.setState({personData:MeData});
+      // }
+      meStore.on("change", this.storeDataHandler.bind(this));
+        this.setState({dataUrl:'http://localhost:3001/monitored-events?offset=1&limit=5&type=json'});
+     }
+    // componentDidMount() {
+    //   if(this.props.searchName!=null & this.props.searchType=='1'){
+    //     var arr= MeData.filter((x=>x.ID==this.props.searchName));
+    //     this.setState({personData:arr});
+    //   }
+    //   if(this.props.searchName!=null & this.props.searchType=='2'){
+    //     this.setState({personData:MeData});
+    //   }
+    // }
     componentWillUnmount() {
-   
+      meStore.removeListener("change", this.storeDataHandler);
+      this.setState({dataUrl:'http://localhost:3001/monitored-events?offset=1&limit=5&type=json'});
+    }
+     storeDataHandler() {
+      let returnValues = meStore.getMEdetails();
+      this.setState({
+            personData: returnValues.dataField,
+            dataCount: returnValues.pageCountField,
+            totalCount: returnValues.totalCountField
+          });
     }
     sortOnClick(eventKey){
       let sortCol = eventKey.target.id;
@@ -140,7 +155,7 @@ class MeGridTable extends Component {
     }
 
     
-    searchResults(e){
+    searchResults(e){ 
       let offset;   
       console.log(typeof e);
       if(e !== undefined){
@@ -163,7 +178,7 @@ class MeGridTable extends Component {
       let callableUrl=this.state.dataUrl;
       console.log(callableUrl);
       this.setState({apiUrl: callableUrl,onSortParams: callParams});
-      personActions.getPersons(callableUrl);
+      meActions.getMeSearch(callableUrl);
     }    
     handleAlertDismiss(){
       this.setState({alertVisible: false});
@@ -185,19 +200,19 @@ class MeGridTable extends Component {
     }
     render() {
     return(<div id="table-container">
+      <Button onClick={this.searchResults.bind(this)} value="Search"> 
+      </Button>
          <Table striped bordered condensed hover>
             <thead>
               <tr style={{height:'5%'}} >
                 {/*<th id="hashcol"/>*/}
-                <th style={{width:'4%' }}>ID <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.codesortableGlyph} id="ID"/></Button></th>
-                <th style={{width:'5%' }}>Live <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.textsortableGlyph} id="Live"/></Button></th>
-                <th style={{width:'10%' }}>Title <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Title"><Glyphicon glyph={this.state.groupingsortableGlyph} id="Title"/></Button></th>                
-                <th style={{width:'5%' }}>Status <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="status"><Glyphicon glyph={this.state.classificationsortableGlyph} id="status"/></Button></th>
-                <th style={{width:'4%' }}>Sev <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Sev"><Glyphicon glyph={this.state.specializationsortableGlyph} id="Sev"/></Button></th>
-                <th style={{width:'6%' }}>ME Type <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="METype"><Glyphicon glyph={this.state.specializationsortableGlyph} id="METype"/></Button></th>
-                <th style={{width:'7%' }}>Prod Ready <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="ProdReady"><Glyphicon glyph={this.state.specializationsortableGlyph} id="ProdReady"/></Button></th>
-                <th style={{width:'7%' }}>Last Edited <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="LastEdited"><Glyphicon glyph={this.state.specializationsortableGlyph} id="LastEdited"/></Button></th>
-                <th style={{width:'5%' }}>Tasks <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="Tasks"><Glyphicon glyph={this.state.specializationsortableGlyph} id="Tasks"/></Button></th>
+                <th style={{width:'2%' }}>ID <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.codesortableGlyph} id="ID"/></Button></th>
+                <th style={{width:'5%' }}>NAME <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.textsortableGlyph} id="NAME"/></Button></th>
+                <th style={{width:'5%' }}>SEVERITY <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="SEVERITYLEVELCODE"><Glyphicon glyph={this.state.groupingsortableGlyph} id="Title"/></Button></th>                
+                <th style={{width:'6%' }}>APPLICABILITY <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="APPLICABILITYTYPECODE"><Glyphicon glyph={this.state.classificationsortableGlyph} id="status"/></Button></th>
+                <th style={{width:'4%' }}>CHRONIC <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="CHRONICBEHAVIOR"><Glyphicon glyph={this.state.specializationsortableGlyph} id="Sev"/></Button></th>
+                <th style={{width:'5%' }}>IMPACTABLE <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="IMPACTABLE"><Glyphicon glyph={this.state.specializationsortableGlyph} id="METype"/></Button></th>
+                <th style={{width:'7%' }}>CLINICALREVIEW<Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="CLINICALREVIEWCRITERIA"><Glyphicon glyph={this.state.specializationsortableGlyph} id="ProdReady"/></Button></th>
               </tr>
             </thead>
             <tbody>
@@ -205,15 +220,13 @@ class MeGridTable extends Component {
                   this.state.personData.map((person, idx) =>                   
                     <tr key={idx} style={{height:'2%' }} >
                       {/*<td id="hashcol" style={{width:'5%' }}>{idx+1}</td>*/}
-                      <td style={{width:'4%' }}>{person.ID}</td>
-                      <td style={{width:'5%' }}>{person.Live}</td>
-                      <td style={{width:'10%' }}>{person.Title}</td>
-                      <td style={{width:'5%' }}>{person.Status}</td>
-                      <td style={{width:'4%' }}>{person.Sev}</td>
-                      <td style={{width:'6%' }}>{person.METype}</td>
-                      <td style={{width:'7%' }}>{person.ProdReady}</td>
-                      <td style={{width:'7%' }}>{person.LastEdited}</td>
-                      <td style={{width:'5%' }}>{person.Tasks}</td>
+                      <td style={{width:'4%' }}>{person.id}</td>
+                      <td style={{width:'5%' }}>{person.NAME}</td>
+                      <td style={{width:'10%' }}>{person.SEVERITYLEVELCODE}</td>
+                      <td style={{width:'5%' }}>{person.APPLICABILITYTYPECODE}</td>
+                      <td style={{width:'4%' }}>{person.CHRONICBEHAVIOR}</td>
+                      <td style={{width:'6%' }}>{person.TIMPACTABLE}</td>
+                      <td style={{width:'7%' }}>{person.CLINICALREVIEWCRITERIA}</td>
                     </tr>
                   )
                 }

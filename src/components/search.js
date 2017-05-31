@@ -20,6 +20,7 @@ import Searchfilter from "../components/searchme/searchFilter";
 import {MEModel} from "../shared/constants";
 const collapseUpText="glyphicon glyphicon-menu-up";
 const collapseDownText="glyphicon glyphicon-menu-down";
+const exportCollapseDownText="glyphicon glyphicon-menu-down";
 const sortedTextAscending = "glyphicon glyphicon-sort-by-alphabet";
 const sortedTextDescending = "glyphicon glyphicon-sort-by-alphabet-alt";
 const sortableText="glyphicon glyphicon-sort";
@@ -41,20 +42,23 @@ class Search extends Component {
 
     closeModal () { this.setState({open: false}); }
 
-  onAddnewMonitoredEvent(value,e){
-    if(value=='1'){
-     window.location = '/mesearch/';
-    }else{
-      window.location = '/addmonitored/';
+
+    onAddnewMonitoredEvent(value,e){
+      if(value=='1'){
+      window.location = '/mesearch/';
+      }else{
+        window.location = '/addmonitored/';
+      }
     }
-  }
  
   render() {
     let tooltip = <Tooltip id="tooltip">Collapse/Hide search results pane!</Tooltip>;
+    
     return (<div>
             <div><Button onClick={this.onAddnewMonitoredEvent.bind(this,'1')} value="0" bsStyle="primary"> Add New Monitored Event  </Button> </div><br/>
             {/*<div><Button onClick={this.onAddnewMonitoredEvent.bind(this,'2')} value="0" bsStyle="primary"> Add New Monitored Event  </Button> </div><br/>*/}
             <Searchfilter  />    
+           
         </div>);
   }
 }

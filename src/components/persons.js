@@ -237,7 +237,7 @@ class Persons extends Component {
           </div> <br/>
           <Collapse in={this.state.exportCollapseVisible}>
               <div>  <br/>
-                   <ExportExcel />
+                   <ExportExcel pageName='person'/>
               </div>
           </Collapse>
         </div>

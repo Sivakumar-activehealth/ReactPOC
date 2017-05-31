@@ -17,6 +17,7 @@ import DatePicker from 'material-ui/DatePicker';
 import DatePickers from 'react-datepicker';
 import {MeStatus} from "../../shared/constants";
 import MeGridTable from "./meGridTable";
+import ExportExcel from "../export";
 import 'react-listbox/dist/react-listbox.css';
 import  'react-bootstrap';
 import moment from 'moment';
@@ -24,10 +25,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import {Navbar, Nav, NavItem, NavDropdown, DropdownButton, MenuItem, CollapsibleNav} from 'react-bootstrap';
 const collapseUpText="glyphicon glyphicon-menu-up";
 const collapseDownText="glyphicon glyphicon-menu-down";
-
+const exportCollapseDownText="glyphicon glyphicon-menu-down";
 class Search extends Component {  
     constructor (props) {           
       super(props);
+     
       this.state={
         reload: false,
         collapseVisible: false,
@@ -37,7 +39,9 @@ class Search extends Component {
         fromdate: null,
         todate:null,
         searchName:null,
-        searchtype:'1'
+        searchtype:'1',
+        exportCollapseVisible:false,
+        exportCollapseGlyph: collapseUpText
       };
       console.log(this.state.dataUrl);
       this.openModal = this.openModal.bind(this);
@@ -89,8 +93,14 @@ class Search extends Component {
    //this.props.onchange(this.state.searchName);
     this.setState({reload:true});
   }
+  exportCollapseChange(e){
+      this.setState({ 
+        exportCollapseVisible: !this.state.exportCollapseVisible,
+        exportCollapseGlyph: this.state.exportCollapseVisible?exportCollapseDownText: collapseUpText });
+   }
   render() {
     let tooltip = <Tooltip id="tooltip">Collapse/Hide search results pane!</Tooltip>;
+    let exporttooltip = <Tooltip id="tooltip">Collapse/Hide export results pane!</Tooltip>;
     return (
       <div style={{backgroundColor:"fffafa"}}>
         <div>
@@ -277,8 +287,23 @@ class Search extends Component {
           </Collapse>            
         </div>
       <br/>
+             <div>
+                <div className="glyphButton">            
+                    <OverlayTrigger placement="bottom" overlay={exporttooltip}>
+                      <Button onClick={this.exportCollapseChange.bind(this)}> 
+                        <Glyphicon glyph={this.state.exportCollapseGlyph} />
+                      </Button>
+                    </OverlayTrigger>
+                  </div> <br/>
+                  <Collapse in={this.state.exportCollapseVisible}>
+                      <div>  <br/>
+                          <ExportExcel pageName='MEsearch' />
+                      </div>
+                  </Collapse>
+             </div>
+             <br/>
       {this.state.searchName &&
-        <MeGridTable searchName={this.state.searchName} searchType={this.state.searchtype}/>
+        <MeGridTable searchName={this.state.searchName} searchType={this.state.searchtype} />
       } 
       {!this.state.searchName &&
        <div className="panel panel-default">

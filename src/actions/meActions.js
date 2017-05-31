@@ -4,7 +4,8 @@ import _ from 'lodash';
 import * as constants from '../shared/constants';
 axios.defaults.timeout = 3000;
 
-export function getPersons(apiUrl){
+
+export function getMeSearch(apiUrl){
     dispatcher.dispatch('FETCH');
     axios.get(apiUrl)
     .then(result =>{

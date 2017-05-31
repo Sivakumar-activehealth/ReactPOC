@@ -8,8 +8,8 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Column from './columnListBox';
-import 'react-dual-listbox/lib/react-dual-listbox.css';
 import '../multiselect.css';
+
 const FLAVOURS = [
       { label: 'PersonID', value: 'PERSONID' },
       { label: 'FirstName', value: 'FIRSTNM' },
@@ -58,11 +58,10 @@ class Export extends Component {
 	}
   exportResults(e){
     debugger
-      if(this.state.selectColumn != undefined && this.state.titleName !=""){
-          this.setState({isValid:true});
-          window.location.href="http://localhost:3001/persons/?type=excel&title=" +this.state.titleName +"&selectColumn="+this.state.selectColumn +"&headColor="+this.state.headColor+"&tableheader="+this.state.tableHead+"&tablerow="+this.state.tableRow+"";
+      if( this.props.pageName == 'person' && this.state.selectColumn != undefined && this.state.titleName !=""){
+        window.location.href="http://localhost:3001/persons/?type=excel&title=" +this.state.titleName +"&selectColumn="+this.state.selectColumn +"&headColor="+this.state.headColor+"&tableheader="+this.state.tableHead+"&tablerow="+this.state.tableRow+"";
       }else{
-          this.setState({isValid:false});
+        window.location.href="http://localhost:3001/monitored-events?offset=1&limit=5&type=excel&title=" +this.state.titleName +"&selectColumn="+this.state.selectColumn +"&headColor="+this.state.headColor+"&tableheader="+this.state.tableHead+"&tablerow="+this.state.tableRow+"";
       }
     }
 	render () {
@@ -74,7 +73,7 @@ class Export extends Component {
               <div className="col-sm-1 col-md-1"> <ControlLabel >Title</ControlLabel>  </div>
                   <div className="col-sm-1 col-md-2">
                     <FormGroup controlId="formInlineText" > 
-                        <FormControl type="text" defaultValue={this.state.titleName} onBlur={(value)=>this.setState({titleName:value.target.value})} placeholder="Title"  bsSize="small"/> 
+                        <FormControl type="text" defaultValue={this.state.titleName} onChange={(value)=>this.setState({titleName:value.target.value})} placeholder="Title"  bsSize="small"/> 
                   </FormGroup>
                  </div>     
             <div className="col-sm-1 col-md-1"><ControlLabel  >Heading:</ControlLabel> </div>
@@ -114,7 +113,7 @@ class Export extends Component {
             <div className="row"> 
               <div className="col-sm-1 col-md-1"><ControlLabel  >Column(s):</ControlLabel> </div>
                   <div className="col-sm-1 col-md-2"style={{width:'40%'}} >
-                     <Column onChange={this.handleSelectChange} />
+                     <Column onChange={this.handleSelectChange} pageName={this.props.pageName} />
                  </div>     
             <div className="col-sm-1 col-md-2"><br/><br/>
               <Button value="0" text="Export" bsStyle="primary" onClick={this.exportResults.bind(this)} >Export</Button>
