@@ -19,7 +19,7 @@ import * as meActions from "../actions/meActions";
 import personStore from "../stores/personStore";
 import Searchfilter from "../components/searchme/searchFilter";
 import meStore from "../stores/meStore";
-import {MEModel} from "../shared/constants";
+import {MEModel,MeTempData} from "../shared/constants";
 import  MetableRow from "./meTableRow"
 import ExportExcel from "./export";
 import "../careengine.css"
@@ -30,7 +30,7 @@ const sortedTextAscending = "glyphicon glyphicon-sort-by-alphabet";
 const sortedTextDescending = "glyphicon glyphicon-sort-by-alphabet-alt";
 const sortableText="glyphicon glyphicon-sort";
 
-class Search extends Component {  
+class MESearch extends Component {  
     constructor (props) {           
       super(props);
       let returnValues=meStore.getMEdetails();
@@ -80,18 +80,13 @@ class Search extends Component {
     }
 
     storeDataHandler() {
-      debugger
       let returnValues = meStore.getMEdetails();
       if(returnValues.dataField !=undefined){
       this.setState({
             personData: returnValues.dataField,
             dataCount: returnValues.pageCountField,
             totalCount: returnValues.totalCountField,
-            isLoad:true
           });
-     }else{
-       //var data=this.state.personData;
-       this.setState({isLoad:false});
      }
     }
     sortOnClick(eventKey){
@@ -155,6 +150,7 @@ class Search extends Component {
 
     
     searchResults(e){ 
+      this.setState({personData:MeTempData});
       let offset;   
       console.log(typeof e);
       if(e !== undefined){
@@ -207,7 +203,21 @@ class Search extends Component {
   render() {
     let tooltip = <Tooltip id="tooltip">Collapse/Hide search results pane!</Tooltip>;
     let exporttooltip = <Tooltip id="tooltip">Collapse/Hide export results pane!</Tooltip>;
-           
+    var rows=[];
+    var data=this.state.personData;
+    MeTempData.map((medata,id)=>{
+    rows.push(<tr>
+               <td style={{width:'3%' }}>{medata.id}</td>
+               <td style={{width:'5%' }}>{medata.name}</td>
+               <td style={{width:'5%' }}>{medata.severitylevelcode}</td>
+               <td style={{width:'7%' }}>{medata.applicabilitytypecode}</td>
+               <td style={{width:'5%' }}>{medata.chronicbehavior}</td>
+               <td style={{width:'6%' }}>{medata.impactable}</td>
+               {/*<td style={{width:'8%' }}>{medata.clinicalreviewcriteria}</td>*/}
+            </tr>);
+    });
+  
+  
     return (<div style={{width:'98%'}}> 
       <h1>Search Monitored Events</h1>
        <div><Button onClick={this.onAddnewMonitoredEvent.bind(this,'1')} value="0" bsStyle="primary"> Add New Monitored Event  </Button> </div><br/>
@@ -258,14 +268,12 @@ class Search extends Component {
                 <th style={{width:'7%' }}>Applicability <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="APPLICABILITYTYPECODE"><Glyphicon glyph={this.state.classificationsortableGlyph} id="status"/></Button></th>
                 <th style={{width:'5%' }}>Chronic <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="CHRONICBEHAVIOR"><Glyphicon glyph={this.state.specializationsortableGlyph} id="Sev"/></Button></th>
                 <th style={{width:'6%' }}>Impactable <Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="IMPACTABLE"><Glyphicon glyph={this.state.specializationsortableGlyph} id="METype"/></Button></th>
-                <th style={{width:'8%' }}>Clinical Review<Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="CLINICALREVIEWCRITERIA"><Glyphicon glyph={this.state.specializationsortableGlyph} id="ProdReady"/></Button></th>
+                {/*<th style={{width:'8%' }}>Clinical Review<Button bsStyle="link" onClick={this.sortOnClick.bind(this)} value="CLINICALREVIEWCRITERIA"><Glyphicon glyph={this.state.specializationsortableGlyph} id="ProdReady"/></Button></th>*/}
               </tr>
             </thead>
             <tbody>
-            
-             <MetableRow />
-            
-          </tbody>
+               {rows}
+            </tbody>
           {this.state.dataCount >= 1 ?
               <tfoot>
                     <tr>
@@ -275,7 +283,8 @@ class Search extends Component {
                           </div>
                         </td>                          
                     </tr>                                        
-              </tfoot>: null}
+              </tfoot>
+              : null}
         </Table>
             <Alert bsStyle="success"> Api call: <br/> <p><strong>{this.state.apiUrl}</strong></p></Alert>
         </div>
@@ -296,4 +305,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default MESearch;

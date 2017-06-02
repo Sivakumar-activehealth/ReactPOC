@@ -62,7 +62,7 @@ render() {
         
         </div> {''}
         <div className="right-panel">
-            {this.state.mepage}
+            {/*{this.state.mepage}*/}
          {this.state.mepage == 1 &&
              <AddnewMonitoredEvent meModel={MEModel } />
          }

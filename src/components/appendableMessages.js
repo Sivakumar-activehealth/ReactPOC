@@ -286,9 +286,10 @@ class AppendableMessage extends Component{
                             <Button bsStyle="primary" onClick={this.saveChanges.bind(this)}>Save changes</Button>
                         </Modal.Footer>
                     </Modal>
-                </div>               
+                </div>       
+                <div className="two-column-container" >    
                 <Form inline>                
-                    <Button bsStyle="primary" onClick={this.openModal.bind(this)} style={{float:"left"}}><i className="material-icons">create</i><ControlLabel>Create New Message</ControlLabel></Button>
+                    <Button bsStyle="primary"  onClick={this.openModal.bind(this)} style={{float:"left"}}><i className="material-icons">create</i><ControlLabel>Create New Message</ControlLabel></Button>
                     <FormControl type="text" placeholder="Enter MessageId to filter" bsSize="small" onChange={this.messageIdFilterChange.bind(this)}/>
                     {' '}
                     <FormGroup controlId="formInlineText">                                                
@@ -297,8 +298,10 @@ class AppendableMessage extends Component{
                         </Button>                    
                     </FormGroup>                
                 </Form>
+                  </div>
                 <br/>
-                <BootstrapTable data={this.state.componentData} striped hover height='120px' exportCSV
+                <div>    
+                <BootstrapTable data={this.state.componentData} striped hover height='125px' exportCSV
                 containerStyle={{background:'aliceblue'}} bodyStyle={{background:'#00ff00'}} 
                 selectRow={selectRow}>
                     <TableHeaderColumn isKey dataField='messageId' width="5%">Message Id</TableHeaderColumn>
@@ -306,6 +309,7 @@ class AppendableMessage extends Component{
                     <TableHeaderColumn dataField='taggedFor' width="15%" dataFormat={this.dateFormatter}>Release Date</TableHeaderColumn>
                     <TableHeaderColumn dataField='status' width="10%">Status</TableHeaderColumn>
                 </BootstrapTable>
+              </div>
             </div>
         )
     }

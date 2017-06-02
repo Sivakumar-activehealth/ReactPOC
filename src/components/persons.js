@@ -182,7 +182,6 @@ class Persons extends Component {
       this.getServerData(this.state.onSortParams,0,this.state.pageLimit,sortCol);
     }
     storeDataHandler() {
-      debugger
       let returnValues = personStore.getPersons();
       if(returnValues.dataField !=undefined){
         this.setState({

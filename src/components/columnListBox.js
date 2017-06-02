@@ -13,12 +13,12 @@ const options = [
 
 var MEoptions = [
                     { label: 'ID', value: 'id' },
-                    { label: 'NAME', value: 'name' },
-                    { label: 'SEVERITYLEVELCODE', value: 'severitylevelcode' },
-                    { label: 'APPLICABILITYTYPECODE', value: 'applicabilitytypecode' },
-                    { label: 'CHRONICBEHAVIOR', value: 'chronicbehavior' },
-                    { label: 'IMPACTABLE', value: 'impactable' },
-                    { label: 'CLINICALREVIEWCRITERIA', value: 'clinicalreviewcriteria' }
+                    { label: 'Name', value: 'name' },
+                    { label: 'SeverityLevelCode', value: 'severitylevelcode' },
+                    { label: 'ApplicabilityTypeCode', value: 'applicabilitytypecode' },
+                    { label: 'ChronicBehavior', value: 'chronicbehavior' },
+                    { label: 'Impactable', value: 'impactable' },
+                    { label: 'ClinicalReviewCriteria', value: 'clinicalreviewcriteria' }
                ];
 class ColumnListBox extends React.Component {
 	constructor() {
@@ -41,9 +41,9 @@ class ColumnListBox extends React.Component {
         	<DualListBox options={options} selected={selected} onChange={this.onChange} />
 		}
 		{this.props.pageName=='MEsearch' &&
-	    	<div style={{width:'100%'}}>
+	    
         	<DualListBox options={MEoptions}  selected={selected} onChange={this.onChange} />
-			</div>
+			
 		}
 		</div>) ;
 }

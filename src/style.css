@@ -338,7 +338,7 @@ rdl-control {
     vertical-align: top;
 }
 
-.react-dual-listbox .rdl-filter .rdl-control {
+.rdl-filter, .rdl-control {
     display: block;
     border: 1px solid #ccc;
     border-radius: 2px;

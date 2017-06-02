@@ -127,7 +127,7 @@ class Sessional extends Component {
                 </div>  
                </Form>
                  </div> 
-                  <div className="col-md-3 col-md-offset-1">
+                  <div className="col-md-5 col-md-offset-2">
                      <Form>
                         <FormGroup >
                             <ControlLabel> Adverse Event:</ControlLabel>
@@ -135,7 +135,7 @@ class Sessional extends Component {
                               selected={this.state.adverseSelect}  onChange={(selected) => {
                               //this.onChange.bind(selected) }}/>*/}
                               
-                              <DualListBox style={{height:'90%'}}  options={AdverseEventoptions} selected={this.state.adverseSelect} 
+                              <DualListBox   options={AdverseEventoptions} selected={this.state.adverseSelect} 
                                 onChange={(selected) => {
                                   this.setState({adverseSelect:selected});
                                 }}  />
