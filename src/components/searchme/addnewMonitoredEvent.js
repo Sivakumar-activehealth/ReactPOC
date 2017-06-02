@@ -38,12 +38,13 @@ class AddnewMonitoredEvent extends Component {
         this.props.onchange('AddNewME',this.state.MeModel);
     }
     render() {
-      return(<div className="addnew">
+      return(<div className="addnew" >
        <div className="panel panel-default" >
                <div className="panel-heading">
                   <h3 className="panel-title">Add New Monitored Event </h3>
                </div>
-               <div className="panel-body">
+<div className="two-column-container">
+    <div className="panel-body">
      
         <div className="col-md-3 col-md-offset-1"  >
             <Form>
@@ -126,7 +127,7 @@ class AddnewMonitoredEvent extends Component {
       
           <div>
           <br/> <br/>
-        </div>
+        </div></div>
      </div>
 </div>
         {/*<input type="button" value="Cancel" className="btn btn-default" onClick={this.onCancelclick.bind()}  />  {}

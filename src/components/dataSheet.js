@@ -33,7 +33,7 @@ class Datasheet extends Component {
         ],
         [{readOnly: true, value: 1}, { value:  100}, {value: 'title 1'}, {value: 'test 1'}, {value: 'aetna 1'},
          { value:  'Achieve condition target',  component: ( 
-          <select onChange={this.onChange}>
+          <select onChange={this.onChange} style={{width:'150px'}}>
             <option value="Achieve condition target">Achieve condition target</option>
             <option value="Add/Intensify Medical therapy">Add/Intensify Medical therapy</option>
             <option value="Alternative Medicine Intraction">Alternative Medicine Intraction</option>
@@ -67,7 +67,7 @@ class Datasheet extends Component {
      
       ],
         [{readOnly: true, value: 2}, {value: 101}, {value: 'title 2'}, {value: 'test 2'}, {value: 'aetna 2'}, { value:  'Add/Intensify Medical therapy',  component: ( 
-          <select onChange={this.onChange}>
+          <select onChange={this.onChange} style={{width:'150px'}}>
             <option value="Achieve condition target">Achieve condition target</option>
             <option value="Add/Intensify Medical therapy">Add/Intensify Medical therapy</option>
             <option value="Alternative Medicine Intraction">Alternative Medicine Intraction</option>
@@ -100,7 +100,7 @@ class Datasheet extends Component {
           </select> )}, {value: 'Manager 2'}
           ],
         [{readOnly: true, value: 3}, {value: 102}, {value:'title 3'}, {value: 'test 3'}, {value: 'aetna 3'}, { value:  'Achieve condition target',  component: ( 
-          <select onChange={this.onChange}>
+          <select onChange={this.onChange} style={{width:'150px'}}>
             <option value="Achieve condition target">Achieve condition target</option>
             <option value="Add/Intensify Medical therapy">Add/Intensify Medical therapy</option>
             <option value="Alternative Medicine Intraction">Alternative Medicine Intraction</option>
@@ -133,7 +133,7 @@ class Datasheet extends Component {
           </select> )}, {value: 'Manager 3'}
           ],
         [{readOnly: true, value: 4}, {value: 103}, {value: 'title 4'}, {value: 'test 4'}, {value: 'aetna 4'}, { value:  'Alternative Medicine Intraction',  component: ( 
-          <select onChange={this.onChange}>
+          <select onChange={this.onChange} style={{width:'150px'}}>
              <option value="Achieve condition target">Achieve condition target</option>
             <option value="Add/Intensify Medical therapy">Add/Intensify Medical therapy</option>
             <option value="Alternative Medicine Intraction">Alternative Medicine Intraction</option>
@@ -179,7 +179,7 @@ class Datasheet extends Component {
     var item=this.state.grid;
     var arr= [{readOnly: true, value: this.state.grid.length}, {value: ''}, {value: ''}, {value: ''}, {value: ''}, 
      { value:  '',  component: ( 
-          <select onChange={this.onChange}>
+          <select onChange={this.onChange}  style={{width:'100px'}}>
              <option value="Achieve condition target">Achieve condition target</option>
             <option value="Add/Intensify Medical therapy">Add/Intensify Medical therapy</option>
             <option value="Alternative Medicine Intraction">Alternative Medicine Intraction</option>
@@ -229,6 +229,7 @@ class Datasheet extends Component {
    }
     render () {
     return (<div>
+      <div className="two-column-container">
        <a style={{background:'#e63946',color:'#fff'}} href='#' onClick={this.onAdditemClick.bind(this)}  >add item</a>
       <ReactDataSheet 
         data={this.state.grid}
@@ -259,6 +260,7 @@ class Datasheet extends Component {
                               </Modal.Footer>
                           </Modal>
                 </div> 
+        </div>
         </div>
     )
   }

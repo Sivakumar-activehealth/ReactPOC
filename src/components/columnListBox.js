@@ -42,7 +42,7 @@ class ColumnListBox extends React.Component {
 		}
 		{this.props.pageName=='MEsearch' &&
 	    	<div style={{width:'100%'}}>
-        			<DualListBox options={MEoptions} selected={selected} onChange={this.onChange} />
+        	<DualListBox options={MEoptions}  selected={selected} onChange={this.onChange} />
 			</div>
 		}
 		</div>) ;

@@ -81,7 +81,7 @@ table.data-grid td.cell > input {
   }
 
   .step {
-    background-color: #ccc;
+    background-color:#D3D3D3;
     min-height: 450px;
     padding: 10px;
   }
@@ -195,20 +195,155 @@ ol.progtrckr li.progtrckr-done:before {
 ol.progtrckr li.progtrckr-done:hover:before {
   color: #333;
 }
-.rdl-move .rdl-move-all .rdl-move-right{
- background-color: #5cb85c;
-}
-/*
-.rdl-move-all{
-    width: 20px;
-}
-.rdl-move-right  {
-   background-color: #5cb85c;
-}
-.rdl-move-left  {
-   background-color:blue;
-   width: 70px,
-}*/
-/*rdl-move rdl-move-all rdl-move-right*/
 
-/*rdl-move rdl-move-right*/
+button.rdl-move{
+  width:20px;
+}
+
+button.rdl-move-right{
+  
+      margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background:white;
+    cursor: pointer;
+    padding: 5px 10px;
+    color:white;
+    font-size: 12px;
+}
+
+button.rdl-move.rdl-move-all.rdl-move-right{
+   margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background:white;
+    cursor: pointer;
+    padding: 5px 10px;
+    color:white;
+    font-size: 12px;
+     background : url(./images/last_active_ahblue.gif) repeat top; 
+    width:15px;
+    height: 17px;
+}
+
+button.rdl-move.rdl-move-all.rdl-move-left{
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background:white;
+    cursor: pointer;
+    padding: 5px 10px;
+    color:white;
+    font-size: 12px;
+    background : url(./images/first_active_ahblue.gif) repeat top; 
+    width:16px;
+    height: 16px;
+   
+}
+button.rdl-move-right{
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background:white;
+    cursor: pointer;
+    padding: 5px 10px;
+    color:#ccc;
+    font-size: 12px;
+     background : url(./images/next_active_ahblue.gif) repeat top; 
+    width:15px;
+    height: 17px;
+}
+
+button.rdl-move-left{
+  
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 5px 10px;
+    color:white;
+    font-size: 12px;
+    background : url(./images/previous_active_ahblue.gif) repeat top; 
+    width:15px;
+    height: 17px;
+     
+}
+
+
+H1 {
+    font-size: 1.2em;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin: 0px 0px 5px 0px;
+    color: #006633;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    clear: left;
+    font-weight: bold;
+}
+
+
+.container_header {
+    background: url(./images/module_header_light.gif) repeat-x top left;
+    border-bottom: 1px solid #666699;
+    border-left: 1px solid #666699;
+    border-right: 1px solid #666699;
+    color: #000;
+    float: left;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 7px 0px 0px 0px;
+    padding: 5px;
+    width: 100%;
+}
+#footer {
+    background: url(./images/panel_header.gif) repeat-x;
+    border-top: 1px solid #7F7F7F;
+    clear: both;
+    font-size: 75%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    margin: 10px 0 0 0;
+    padding: 5px;
+    text-align: center;
+    height: 30px;
+}
+rdl-control {
+    -ms-flex: 1 0 auto;
+    -webkit-box-flex: 1;
+    flex: 1 0 auto;
+}
+
+
+
+.thead th {
+    background: url(./images/fon-table-header-gray.gif);
+    border-bottom: 1px solid #D0D0BF;
+    border-top: 1px solid #D0D0BF;
+    border-right: 1px solid #D0D0BF;
+    border-left: 1px solid #ffffff;
+    padding: 5px 10px 5px 5px;
+    font-weight: bold;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    color: #000;
+    text-align: left;
+}
+.table td {
+    padding: 8px;
+    border-bottom: 1px solid #D0D0BF;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #333;
+    text-align: left;
+    white-space: normal;
+    vertical-align: top;
+}
+
+.react-dual-listbox .rdl-filter .rdl-control {
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 8px 12px;
+    width: 100%;
+    color: #333;
+    font-size: 10px;
+}

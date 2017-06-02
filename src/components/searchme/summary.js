@@ -46,6 +46,7 @@ class Summary extends Component {
                       Add New Monitored Event </h3>
                </div>
                { this.state.addMonitoredShow &&
+               <div className="two-column-container">             
                <div className="panel-body">
                   <div className="col-md-4 col-md-offset-1">
                       <Form>
@@ -111,6 +112,7 @@ class Summary extends Component {
                      </Form>
                   </div>  
                </div> 
+               </div>
                }
 
 {/*Provider Display*/}
@@ -121,6 +123,7 @@ class Summary extends Component {
                       Provider Display </h3>
                </div>
        {this.state.providerdisplayshow &&
+        <div className="two-column-container">
                <div className="panel-body">
                   <div className="col-md-4 col-md-offset-1">
                       <Form>
@@ -165,6 +168,7 @@ class Summary extends Component {
                       </Form>
                   </div>  
                </div> 
+               </div>
                }
 
 
@@ -177,6 +181,7 @@ class Summary extends Component {
                       Clinical operation </h3>
                </div>
                  {this.state.clinicalShow &&
+                  <div className="two-column-container">
                <div className="panel-body">
                   <div className="col-md-4 col-md-offset-1">
                       <Form>
@@ -200,6 +205,7 @@ class Summary extends Component {
                      </Form>
                   </div>  
                </div> 
+               </div>
                }
 {/*End of clinical Operation*/}
 {/*Sessional*/}
@@ -210,6 +216,7 @@ class Summary extends Component {
                       Sessional </h3>
                </div>
                   {this.state.sessionalShow &&
+                   <div className="two-column-container">
                <div className="panel-body">
                   <div className="col-md-4 col-md-offset-1">
                       <Form>
@@ -242,6 +249,7 @@ class Summary extends Component {
                   </Form>
                   </div>  
                </div> 
+               </div>
                }
 
 {/*End of Sessional*/}

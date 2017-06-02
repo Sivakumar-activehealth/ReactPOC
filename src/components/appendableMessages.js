@@ -289,7 +289,7 @@ class AppendableMessage extends Component{
                 </div>               
                 <Form inline>                
                     <Button bsStyle="primary" onClick={this.openModal.bind(this)} style={{float:"left"}}><i className="material-icons">create</i><ControlLabel>Create New Message</ControlLabel></Button>
-                    <FormControl type="text" placeholder="Enter MessageId to filter" bsSize="large" onChange={this.messageIdFilterChange.bind(this)}/>
+                    <FormControl type="text" placeholder="Enter MessageId to filter" bsSize="small" onChange={this.messageIdFilterChange.bind(this)}/>
                     {' '}
                     <FormGroup controlId="formInlineText">                                                
                         <Button onClick={this.searchResults.bind(this)} value="0" bsStyle="primary">

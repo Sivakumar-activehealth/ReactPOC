@@ -67,6 +67,7 @@ class Sessional extends Component {
                <div className="panel-heading">
                   <h3 className="panel-title">Sessional</h3>
                </div>
+              <div className="two-column-container">             
                <div className="panel-body">
                   <div className="col-md-4 col-md-offset-1">
                     <Form>
@@ -154,7 +155,7 @@ class Sessional extends Component {
                       </Form>   
                  </div>  
                 </div>    
-                  
+                </div>  
       </div>  
          
       </div>);

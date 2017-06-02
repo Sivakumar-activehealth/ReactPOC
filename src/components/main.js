@@ -13,7 +13,7 @@ class Main extends Component {
     render(){
         return(<MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
             <div>
-                <nav className="navbar navbar-default">
+                <nav className="navbar navbar-default sf-shadow">
                     <div className="container-fluid">
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav">
@@ -34,6 +34,7 @@ class Main extends Component {
                 <div className="container">
                     {this.props.children}
                 </div>
+                <div id="footer" >©2007-2017 ActiveHealth Management Inc. All rights reserved.</div>
             </div>
             </MuiThemeProvider>
         );

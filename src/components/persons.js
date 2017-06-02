@@ -63,12 +63,10 @@ class Persons extends Component {
     }
     componentWillMount() {
       personStore.on("change", this.storeDataHandler.bind(this));
-      this.setState({dataUrl:'http://localhost:3001/persons/?type=json',activePage:1,pageLimit:20});
     }
 
     componentWillUnmount() {
       personStore.removeListener("change", this.storeDataHandler);
-      this.setState({dataUrl:'http://localhost:3001/persons/?type=json'});
     }
     
     openModal () { console.log('msg'); this.setState({open: true}); }
@@ -184,28 +182,33 @@ class Persons extends Component {
       this.getServerData(this.state.onSortParams,0,this.state.pageLimit,sortCol);
     }
     storeDataHandler() {
+      debugger
       let returnValues = personStore.getPersons();
-      this.setState({
-            personData: returnValues.dataField,
-            dataCount: returnValues.pageCountField,
-            totalCount: returnValues.totalCountField
-          });
+      if(returnValues.dataField !=undefined){
+        this.setState({
+              personData: returnValues.dataField,
+              dataCount: returnValues.pageCountField,
+              totalCount: returnValues.totalCountField
+            });
+      }
     }
   render() {
     let tooltip = <Tooltip id="tooltip">Collapse/Hide search results pane!</Tooltip>;
     let exporttooltip = <Tooltip id="tooltip">Collapse/Hide export results pane!</Tooltip>;
     return (
-      <div>
+       <div>
+          <div className="two-column-container">
           <div className="glyphButton">            
-            <OverlayTrigger placement="bottom" overlay={tooltip}>
+            {/*<OverlayTrigger placement="bottom" overlay={tooltip}>
               <Button onClick={this.collapseChange.bind(this)}> 
                 <Glyphicon glyph={this.state.collapseGlyph} />
               </Button>
-            </OverlayTrigger>
+            </OverlayTrigger>*/}
+              <a href="#" onClick={this.collapseChange.bind(this)}>Show/Hide Person search </a>
           </div>  
         <div>
         <Collapse in={this.state.collapseVisible}>
-          <div>        
+          <div>    <br/>    
               <Form inline>
                 <FormGroup controlId="formInlineText">
                   <ControlLabel>First Name</ControlLabel>
@@ -225,15 +228,18 @@ class Persons extends Component {
               </Form>
             </div>
           </Collapse>  
+          </div>
           <br/>         
         </div>
         <div><br/>
+        <div className="two-column-container">
          <div className="glyphButton">            
-            <OverlayTrigger placement="bottom" overlay={exporttooltip}>
+            {/*<OverlayTrigger placement="bottom" overlay={exporttooltip}>
               <Button onClick={this.exportCollapseChange.bind(this)}> 
                 <Glyphicon glyph={this.state.exportCollapseGlyph} />
               </Button>
-            </OverlayTrigger>
+            </OverlayTrigger>*/}
+             <a href="#" onClick={this.exportCollapseChange.bind(this)}>Show/Hide Custom export </a>
           </div> <br/>
           <Collapse in={this.state.exportCollapseVisible}>
               <div>  <br/>
@@ -241,11 +247,12 @@ class Persons extends Component {
               </div>
           </Collapse>
         </div>
+        </div>
       <br/> <br/>
       {this.state.isgridShow &&
         <div id="table-container">
-         <Table striped bordered condensed hover>
-            <thead>
+         <Table striped bordered condensed hover className="table">
+            <thead className="thead">
               <tr>
                 <th id="hashcol" style={{width:'2%' }}/>
                 <th style={{width:'5%' }}>Person Id <Button bsStyle="link" onClick={this.sortOnClick.bind(this)}><Glyphicon glyph={this.state.codesortableGlyph} id="PERSONID"/></Button></th>
@@ -257,7 +264,7 @@ class Persons extends Component {
             </thead>
             <tbody>
                 { this.state.personData &&
-                  this.state.personData.map((person, idx) =>                   
+                  this.state.personData.map((person, idx) =>  
                     <tr key={idx} style={{height:'15%' }}>
                       <td id="hashcol" style={{width:'2%' }}>{idx+1}</td>
                       <td style={{width:'5%' }}>{person.PERSONID}</td>
@@ -285,16 +292,18 @@ class Persons extends Component {
         </div>
       }
       {!this.state.isgridShow &&
-       <div className="panel panel-default" style={{width:'80%'}} >
-               <div className="panel-heading">
+
+          <div >
+               <div className="container_header">
                   <h3 className="panel-title">Results </h3>
                </div>
-               <div className="panel-body">
-     
-        <div className="col-md-3 col-md-offset-0" style={{width:'60%'}} >Use Search to populate 'Persons' details </div>
+              <div className="two-column-container_V2"  >
+                  <div className="col-md-3 col-md-offset-0"  style={{width:'50%'}} >Use Search to populate 'Persons' details </div>
+              </div>
         </div>
-         </div>
-      }
+      }<br/><br/>
+      <div style={{height:'auto'}}></div>
+      
       </div>);
   }
 }

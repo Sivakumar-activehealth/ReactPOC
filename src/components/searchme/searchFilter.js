@@ -17,7 +17,6 @@ import DatePicker from 'material-ui/DatePicker';
 import DatePickers from 'react-datepicker';
 import {MeStatus} from "../../shared/constants";
 import MeGridTable from "./meGridTable";
-import ExportExcel from "../export";
 import 'react-listbox/dist/react-listbox.css';
 import  'react-bootstrap';
 import moment from 'moment';
@@ -25,7 +24,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import {Navbar, Nav, NavItem, NavDropdown, DropdownButton, MenuItem, CollapsibleNav} from 'react-bootstrap';
 const collapseUpText="glyphicon glyphicon-menu-up";
 const collapseDownText="glyphicon glyphicon-menu-down";
-const exportCollapseDownText="glyphicon glyphicon-menu-down";
+
 class Search extends Component {  
     constructor (props) {           
       super(props);
@@ -38,18 +37,14 @@ class Search extends Component {
         dataUrl: this.props.Source,
         fromdate: null,
         todate:null,
-        searchName:null,
-        searchtype:'1',
-        exportCollapseVisible:false,
-        exportCollapseGlyph: collapseUpText
+       
       };
       console.log(this.state.dataUrl);
       this.openModal = this.openModal.bind(this);
       this.closeModal = this.closeModal.bind(this);
       this.taggedForDatePickerChange=this.taggedForDatePickerChange.bind(this);
       this.taggedForDatePickerChange2=this.taggedForDatePickerChange2.bind(this);
-      this.onSearchClick=this.onSearchClick.bind(this);
-      this.onTypechange=this.onTypechange.bind(this);
+     
       this.onDateChange = this.onDateChange.bind(this);
       console.log(this.state.codeSortColDesc);      
     }
@@ -67,9 +62,7 @@ class Search extends Component {
     openSearchScreen(){
       this.openModal();
     }
-    onTypechange(e){
-      this.setState({searchtype:e.target.value});
-    }
+   
    
     collapseChange(e){
       this.setState({ 
@@ -89,51 +82,26 @@ class Search extends Component {
   onAddnewMonitoredEvent(){
     window.location = '/addmonitored/';
   }
-  onSearchClick(e){
-   //this.props.onchange(this.state.searchName);
-    this.setState({reload:true});
-  }
-  exportCollapseChange(e){
-      this.setState({ 
-        exportCollapseVisible: !this.state.exportCollapseVisible,
-        exportCollapseGlyph: this.state.exportCollapseVisible?exportCollapseDownText: collapseUpText });
-   }
+  
+ 
   render() {
     let tooltip = <Tooltip id="tooltip">Collapse/Hide search results pane!</Tooltip>;
-    let exporttooltip = <Tooltip id="tooltip">Collapse/Hide export results pane!</Tooltip>;
+    
     return (
-      <div style={{backgroundColor:"fffafa"}}>
-        <div>
-          <Form inline>
-              <FormGroup controlId="formInlineTxt">
-                 <FormControl componentClass="select" placeholder="select"  bsSize="small" onChange={this.onTypechange.bind('1')} >
-                      <option value="1">ID</option>
-                      <option value="2">Name</option>
-                  </FormControl> {'  '}
-                  <FormControl type="text" defaultValue={this.state.searchName} onBlur={(value)=>this.setState({searchName:value.target.value})} placeholder="Search" bsSize="small"/>  
-                  {' '}
-                  <Button  value="0" bsStyle="primary" onClick={this.onSearchClick.bind(this)} >
-                    Search 
-                  </Button>
-              </FormGroup>
-           </Form>
-        </div>
-
+      <div className="two-column-container" style={{backgroundColor:"fffafa"}}>
           <div className="glyphButton">            
-            <OverlayTrigger placement="bottom" overlay={tooltip}>
+            {/*<OverlayTrigger placement="bottom" overlay={tooltip}>
               <Button onClick={this.collapseChange.bind(this)}> 
                 <Glyphicon glyph={this.state.collapseGlyph} />
               </Button>
-            </OverlayTrigger>
-          </div>  
-       
+            </OverlayTrigger> */} 
+            <a href="#" onClick={this.collapseChange.bind(this)}>Show/Hide Additional Filters</a><br/>
+          </div> 
+      <br/>
         <div>
-         <br/><br/>
         <Collapse in={this.state.collapseVisible}>
-        
-
-          <div>   
-          <div className="container">        
+          <div>  <br/> 
+          <div className="container" >        
             <div className="row">
              <div className="col-sm-1 col-md-1">  
                <ControlLabel  >Status:</ControlLabel> </div>
@@ -286,36 +254,6 @@ class Search extends Component {
             </div>
           </Collapse>            
         </div>
-      <br/>
-             <div>
-                <div className="glyphButton">            
-                    <OverlayTrigger placement="bottom" overlay={exporttooltip}>
-                      <Button onClick={this.exportCollapseChange.bind(this)}> 
-                        <Glyphicon glyph={this.state.exportCollapseGlyph} />
-                      </Button>
-                    </OverlayTrigger>
-                  </div> <br/>
-                  <Collapse in={this.state.exportCollapseVisible}>
-                      <div>  <br/>
-                          <ExportExcel pageName='MEsearch' />
-                      </div>
-                  </Collapse>
-             </div>
-             <br/>
-      {this.state.searchName &&
-        <MeGridTable searchName={this.state.searchName} searchType={this.state.searchtype} />
-      } 
-      {!this.state.searchName &&
-       <div className="panel panel-default">
-               <div className="panel-heading">
-                  <h3 className="panel-title">Results </h3>
-               </div>
-               <div className="panel-body">
-     
-        <div className="col-md-3 col-md-offset-0"  >Use Search to populate 'Suppliers' area </div>
-        </div>
-         </div>
-      }
    </div>);
   }
 }

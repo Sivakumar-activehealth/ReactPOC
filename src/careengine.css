@@ -1,0 +1,277 @@
+
+
+/*-----------------------------------------------------------------------------
+// Info Container
+// Based on two-column-container but heavily modified 
+// Used in GenericPopup for Account Package ID, Name, and Type                                                           
+//----------------------------------------------------------------------------*/
+.info-container 
+{
+    font-family :Courier New;
+    font-size: 70%; 
+    font-style: normal; 
+    font-weight: normal;
+    color:#000; 
+    background: none; 
+    background-color:rgb(255, 250, 250); /*#F5F5F5; /* WhiteSmoke: #F5F5F5 */
+    /* two-column-container attributes except background and altered margin */
+	border: 1px solid #ccc; 
+	float: left;
+	height: auto;
+	margin: 8px 0 3px 0;  /* trbl */
+	padding: 5px;
+	text-align: left;
+	width:98%;
+	z-index: 1;
+	}
+
+/*----------------------------------------------------------------------------*/
+/* Tab Panel - Container Header and Two Column Containers                     */
+/*----------------------------------------------------------------------------*/
+.tab-panel-container-header {
+    background: url(./images/module_header_light.gif) repeat-x top left;
+    border-bottom: 1px solid #666699;
+    border-left: 1px solid #666699;
+    border-right: 1px solid #666699;
+    color:#000;
+    font-size:.9em;
+    font-weight:bold;
+    margin: 7px 0px 0px 0px;
+    padding: 5px;
+    width:98%;
+	}
+	/*
+
+    padding: 5px 10px 5px 5px;
+    float: left;
+    */
+
+/* Note: Both used in ME_EditCommDetail only, as of 6/2010 */
+.tab-panel-two-column-container-noborder 
+{
+	width: 98%;
+}
+/* Note: This is tab-container with the background uncommented  */
+.tab-panel-two-column-container 
+{
+/*	background: url(./images/panel2.png) repeat-x top; */
+	border: 1px solid #ccc; 
+	clear:left;
+    height: auto;
+	float: left;
+	margin: 0 0 10px 0;
+	padding: 5px;
+	position: relative;
+    text-align: left;
+    width:98%;
+}
+
+.tab-panel-two-column-container_IE6 {
+
+	background: url(./images/panel2.png) repeat-x top;
+	border: 1px solid #ccc; 
+	margin: 0 0 10px 0;
+	padding: 5px; /* trbl */
+	width: 98%;
+	}
+
+/* Repeat background vertically to create Solid-FeatherOut-FeatherIn-Solid */
+/* Note: NOT used as of 6/2010 */
+.tab-panel-two-column-container-feathered {
+	background: url(./images/panel2.png) repeat top; 
+	border: 1px solid #ccc; 
+
+	float: left;
+	margin: 0 0 10px 0;
+	padding: 5px 5px 0px 5px; /* trbl */
+	width:98%;
+	}
+	/* padding: 5px; */
+
+/* Two-Column Container pair with no top and bottom border which is useful when
+   containers are adjacent and background color is blended. Top has no bottom
+   border and Bottom has no top border. See ME_EditCommDetail for example */
+/* Note: NOT used as of 6/2010 */
+.tab-panel-two-column-container-pair-top {
+
+	background: url(./images/panel2.png) repeat-x top;
+	border: 1px solid #ccc; 
+	border-bottom: 0px none #ccc;
+	padding: 5px 10px 0px 5px;
+	width:98%;
+}
+.tab-panel-two-column-container-pair-bottom {
+	background: url(./images/panel2.png) repeat-x bottom ;
+
+	border: 1px solid #ccc;
+	border-top: 0px none #ccc;
+	margin: 0 0 10px 0;
+	padding: 0px 10px 5px 5px;
+	width:98%;
+}
+/*-------------------------------------*/
+/* Class for Supplier Confirmation Dialog*/
+/*-------------------------------------*/
+.removeAssocSupplierDialog { 
+    z-index: 2;
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* Two Column Container (and variations)                                      */
+/*----------------------------------------------------------------------------*/
+.two-column-container {
+
+	background: url(./images/panel2.png) repeat-x top;
+	border: 1px solid #ccc; 
+	/*float: left;*/
+	height: auto;
+	margin: 0 0 0 0;
+	padding: 5px;
+	text-align: left;
+	width:100%;
+    z-index: 1;
+	
+	/* Commented: was covering AJAX calendar control, but also must be done
+       with "theader th" to prevent locked position of DataGrid headers when
+       vertically scrolling the browser.
+	/* position:relative; */
+	}
+	
+/*----------------------------------------------------------------------------*/
+/* Two Column Container (vertical search)                                     */
+/*----------------------------------------------------------------------------*/
+.two-column-container-verticalsearch {
+
+	float: left;
+	height: auto;
+	margin: 0 0 0 0;
+	padding: 0px;
+	text-align: left;
+	width:100%;
+	z-index: 1;
+	
+	}
+
+/* Repeat background vertically to create Solid-FeatherOut-FeatherIn-Solid */
+.two-column-container_V2 {
+	background: url(./images/panel2.png) repeat top; 
+	border: 1px solid #ccc; 
+
+	float: left;
+	height: auto;
+	margin: 0 0 10px 0;
+	padding: 5px;
+	text-align: left;
+	width:100%;
+	z-index: 1;
+	}
+
+/*----------------------------------------------------------------------------*/
+/* Two-Column Container pair with no top and bottom border which is useful    */
+/*   when containers are adjacent and background color is blended             */
+/*   Top has no bottom border and Bottom has no top border                    */
+/*   See EditSupplier for example                                             */
+/*----------------------------------------------------------------------------*/	
+.two-column-container_pair_top {
+
+	background: url(./images/panel2.png) repeat-x top;
+	border: 1px solid #ccc; 
+	border-bottom: 0px none #ccc;
+	float: left;
+	height: auto;
+	padding: 0px 10px 0px 0px;
+	text-align: left;
+	width:98%;
+	z-index: 1;
+	}
+.two-column-container_pair_bottom {
+	background: url(./images/panel2.png) repeat-x bottom ;
+
+	border: 1px solid #ccc;
+	border-top: 0px none #ccc;
+	float: left;
+	height: auto;
+	margin: 0 0 0 0;
+	padding: 0px 10px 0px 0px;
+	text-align: left;
+	width:98%;
+	z-index: 1;
+	}
+
+
+	
+/*----------------------------------------------------------------------------*/
+/* Tab Container                                                              */
+/*----------------------------------------------------------------------------*/
+	
+.tab-container {
+	text-align: left;
+	/*	background: url(./images/panel2.png) repeat-x top;*/
+	background-color: #ffffff;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: 0 0 10px 0;
+	padding: 5px;
+	height: auto;
+	float: left;
+	clear:left;
+	width:98%;
+	position: relative;
+	}
+	
+.two-column-left-verticalsearch 
+{
+    background: url(./images/panel2.png) repeat-x top;
+	border: 1px solid #ccc; 
+	float:left;
+	width:17%;
+	background-color: #f1fdff;
+	padding: 0px 0px 0px 0px;
+	margin: 0px;
+	margin-right:0px;
+	}
+	
+.two-column-right-verticalsearch 
+{
+    background: url(./images/panel2.png) repeat-x top;
+	border: 1px solid #ccc; 
+	float: left;
+	width:80%;
+	background-color: #f1fdff;
+	padding: 0px 0px 0px 0px;
+	 margin-left: 5px;
+	}
+	
+.two-column-left {
+	float:left;
+	width:30%;
+
+	background-color: #f1fdff;
+	padding: 2px 5px 8px 8px;
+	margin: 5px;
+	}
+
+.two-column-right {
+
+	float: left;
+	width:30%;
+	background-color: #f1fdff;
+	padding: 2px 5px 8px 8px;
+	margin: 5px;
+	}
+	
+#two-column-panel{
+
+	float: left;
+	width: 30%;
+	background-color:#f1f1fd;
+	padding: 0px 5px 5px 5px;
+	margin: 10px;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #ccc;
+	}
+
