@@ -307,13 +307,26 @@ H1 {
     text-align: center;
     height: 30px;
 }
+
+#header {
+    background: #fff no-repeat;
+    border-bottom: 1px solid #ccc;
+    border-top: 4px groove #ccc;
+    color: #ffffff;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 1px;
+    padding: 10px 10px 10px 7px;
+    text-align: left;
+}
+#logoimg {
+  background-image: url(./images/logo_Active_health.gif);
+}
 rdl-control {
     -ms-flex: 1 0 auto;
     -webkit-box-flex: 1;
     flex: 1 0 auto;
 }
-
-
 
 .thead th {
     background: url(./images/fon-table-header-gray.gif);

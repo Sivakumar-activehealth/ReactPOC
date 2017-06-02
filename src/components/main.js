@@ -12,7 +12,14 @@ import Footer from './footer';
 class Main extends Component {
     render(){
         return(<MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+             
             <div>
+               <div id="header">
+
+                   <div class="float-left">
+                      <img  id="logoimg" width="183" height="35" />
+                   </div>
+               </div>
                 <nav className="navbar navbar-default sf-shadow">
                     <div className="container-fluid">
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
