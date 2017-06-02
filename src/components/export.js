@@ -57,7 +57,6 @@ class Export extends Component {
 		this.setState({ selected });
 	}
   exportResults(e){
-    debugger
       if( this.props.pageName == 'person' && this.state.selectColumn != undefined && this.state.titleName !=""){
         window.location.href="http://localhost:3001/persons/?type=excel&title=" +this.state.titleName +"&selectColumn="+this.state.selectColumn +"&headColor="+this.state.headColor+"&tableheader="+this.state.tableHead+"&tablerow="+this.state.tableRow+"";
       }else{
