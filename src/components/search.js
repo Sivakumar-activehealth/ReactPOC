@@ -19,7 +19,7 @@ import * as meActions from "../actions/meActions";
 import personStore from "../stores/personStore";
 import Searchfilter from "../components/searchme/searchFilter";
 import meStore from "../stores/meStore";
-import {MEModel,MeTempData} from "../shared/constants";
+import {MEModel} from "../shared/constants";
 import  MetableRow from "./meTableRow"
 import ExportExcel from "./export";
 import "../careengine.css"
@@ -36,6 +36,7 @@ class MESearch extends Component {
       let returnValues=meStore.getMEdetails();
       this.state={
         open: false,
+        isgridShow:false,
         isLoad:false,
         searchName:null,
         searchtype:'1',
@@ -51,11 +52,11 @@ class MESearch extends Component {
         specializationsortableGlyph:sortableText,
         activePage: 1,
         pageLimit:5,
-        personData: returnValues,
+        meData: returnValues,
         sortColumn:"code",
         dataCount:returnValues.length,
-        totalCount:100,
-        dataUrl: 'http://localhost:3001/monitored-events?offset=1&limit=5&type=json',
+        totalCount:returnValues.totalCountField,
+        dataUrl: 'http://localhost:3001/monitored-events?offset=1&limit=10&type=json',
         text:"",
         code:"",
         grouping:"",
@@ -67,27 +68,25 @@ class MESearch extends Component {
       console.log(this.state.dataUrl);
       this.openModal = this.openModal.bind(this);
       this.closeModal = this.closeModal.bind(this);
-      this.searchResults=this.searchResults.bind(this);
-      this.onTypechange=this.onTypechange.bind(this);
-      this.storeDataHandler=this.storeDataHandler.bind(this);
+      // this.searchResults=this.searchResults.bind(this);
+      // this.onTypechange=this.onTypechange.bind(this);
+      // this.storeDataHandler=this.storeDataHandler.bind(this);
     }
-    componentWillMount() { 
-        meStore.on("change", this.storeDataHandler.bind(this));
-     }
-    
-    componentWillUnmount() {
-        meStore.removeListener("change", this.storeDataHandler);
+    componentWillMount() {  
+       meStore.on("change", this.storeDataHandler.bind(this));
     }
-
+    componentWillUnmount() { 
+       meStore.removeListener("change", this.storeDataHandler);
+    }
     storeDataHandler() {
-      let returnValues = meStore.getMEdetails();
-      if(returnValues.dataField !=undefined){
-      this.setState({
-            personData: returnValues.dataField,
-            dataCount: returnValues.pageCountField,
-            totalCount: returnValues.totalCountField,
-          });
-     }
+          let returnValues = meStore.getMEdetails();
+          if(returnValues.dataField !=undefined){
+          this.setState({
+                meData: returnValues.dataField,
+                dataCount: returnValues.pageCountField,
+                totalCount: returnValues.totalCountField,
+              });
+        }
     }
     sortOnClick(eventKey){
       let sortCol = eventKey.target.id;
@@ -150,7 +149,6 @@ class MESearch extends Component {
 
     
     searchResults(e){ 
-      this.setState({personData:MeTempData});
       let offset;   
       console.log(typeof e);
       if(e !== undefined){
@@ -166,6 +164,7 @@ class MESearch extends Component {
       let serverParams="?";      
       console.log('inside results click');
       this.getServerData(serverParams,offset,this.state.pageLimit,this.state.sortColumn);
+      this.setState({isgridShow:true});
     }
     getServerData(params,offset,limit,sortCol){
       let callParams = params;
@@ -179,7 +178,13 @@ class MESearch extends Component {
 
     closeModal () { this.setState({open: false}); }
 
-
+     handleSelect(eventKey) {
+      console.log(eventKey);      
+      this.setState({
+        activePage: eventKey
+      });
+      this.searchResults(eventKey);
+    }
     onAddnewMonitoredEvent(value,e){
       if(value=='1'){
       window.location = '/mesearch/';
@@ -188,11 +193,6 @@ class MESearch extends Component {
       }
     }
     onTypechange(e){
-      if( this.state.personData.length > 0 ){
-                 this.state.personData.forEach(function(element) {
-                         var ss=element.id;
-                  })
-      }
       this.setState({searchtype:e.target.value});
     }
     exportCollapseChange(e){
@@ -204,20 +204,19 @@ class MESearch extends Component {
     let tooltip = <Tooltip id="tooltip">Collapse/Hide search results pane!</Tooltip>;
     let exporttooltip = <Tooltip id="tooltip">Collapse/Hide export results pane!</Tooltip>;
     var rows=[];
-    var data=this.state.personData;
-    MeTempData.map((medata,id)=>{
-    rows.push(<tr>
-               <td style={{width:'3%' }}>{medata.id}</td>
-               <td style={{width:'5%' }}>{medata.name}</td>
-               <td style={{width:'5%' }}>{medata.severitylevelcode}</td>
-               <td style={{width:'7%' }}>{medata.applicabilitytypecode}</td>
-               <td style={{width:'5%' }}>{medata.chronicbehavior}</td>
-               <td style={{width:'6%' }}>{medata.impactable}</td>
-               {/*<td style={{width:'8%' }}>{medata.clinicalreviewcriteria}</td>*/}
-            </tr>);
-    });
-  
-  
+    if(this.state.meData.length> 0){
+      var data=this.state.meData;
+        data.map((medata,id)=>{
+        rows.push(<tr key={medata.id} className={medata.id}>
+                <td style={{width:'3%' }}>{medata.id}</td>
+                <td style={{width:'5%' }}>{medata.name}</td>
+                <td style={{width:'5%' }}>{medata.severitylevelcode}</td>
+                <td style={{width:'7%' }}>{medata.applicabilitytypecode}</td>
+                <td style={{width:'5%' }}>{medata.chronicbehavior}</td>
+                <td style={{width:'6%' }}>{medata.impactable}</td>
+              </tr>);
+          });
+        }
     return (<div style={{width:'98%'}}> 
       <h1>Search Monitored Events</h1>
        <div><Button onClick={this.onAddnewMonitoredEvent.bind(this,'1')} value="0" bsStyle="primary"> Add New Monitored Event  </Button> </div><br/>
@@ -257,7 +256,7 @@ class MESearch extends Component {
                   </Collapse>
              </div>
             <br/>
-      {this.state.searchName &&
+      {this.state.isgridShow &&
          <div id="table-container">
          <Table striped bordered condensed hover className="table">
             <thead className="thead">
@@ -272,14 +271,16 @@ class MESearch extends Component {
               </tr>
             </thead>
             <tbody>
-               {rows}
+              {rows}
             </tbody>
+              
           {this.state.dataCount >= 1 ?
               <tfoot>
                     <tr>
                         <td colSpan="8">
                           <div>
-                            <Pagination bsSize="small" prev next first last ellipsis boundaryLinks items={this.state.totalCount>5?Math.ceil(this.state.totalCount/5):0} maxButtons={5} activePage={this.state.activePage} onSelect={this.handleSelect.bind(this)}/>
+                            {/*<Pagination bsSize="small" prev next first last ellipsis boundaryLinks items={this.state.totalCount>5?Math.ceil(this.state.totalCount/5):0} maxButtons={5} activePage={this.state.activePage} onSelect={this.handleSelect.bind(this)}/>*/}
+                              <Pagination bsSize="small" prev next first last ellipsis boundaryLinks items={this.state.totalCount>5?Math.ceil(this.state.totalCount/10):0} maxButtons={5} activePage={this.state.activePage} onSelect={this.handleSelect.bind(this)}/>
                           </div>
                         </td>                          
                     </tr>                                        
@@ -290,7 +291,7 @@ class MESearch extends Component {
         </div>
         }
            
-      {!this.state.searchName &&
+      {!this.state.isgridShow &&
        <div >
                <div className="container_header">
                   <h3 className="panel-title">Results </h3>

@@ -9,13 +9,13 @@ class meSearchStore extends EventEmitter{
     
     constructor(){
         super();
-       
+        this.meData=[];
         this.dataCount = 0;
         this.totalCount = 0;
     }
 
     getMEdetails(){
-        return { dataField :this.personData,pageCountField: this.dataCount,totalCountField:this.totalCount };        
+        return { dataField :this.meData,pageCountField: this.dataCount,totalCountField:this.totalCount };        
     }
     
     handleActions(action) {
@@ -25,7 +25,7 @@ class meSearchStore extends EventEmitter{
             break;
         }
         case constants.ActionEvents.receiveData: {
-            this.personData = action.personData;
+            this.meData = action.meData;
             this.dataCount = action.dataCount;
             this.totalCount= action.totalCount;            
             this.emit("change");

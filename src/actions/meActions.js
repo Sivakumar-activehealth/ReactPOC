@@ -10,7 +10,7 @@ export function getMeSearch(apiUrl){
     axios.get(apiUrl)
     .then(result =>{
          dispatcher.dispatch({type: constants.ActionEvents.receiveData,
-            personData: result.data,
+            meData: result.data,
             dataCount: result.data.length,
             totalCount: _.get(result.headers,"x-row-count"),
             message: constants.SuccessMessage
@@ -23,7 +23,7 @@ export function getMeSearch(apiUrl){
             console.log(result.data);
         }
         dispatcher.dispatch({type: constants.ActionEvents.receiveData,
-            personData: result.data,
+            meData: result.data,
             dataCount: 0,
             totalCount: 0
          });
