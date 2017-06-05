@@ -84,6 +84,7 @@ table.data-grid td.cell > input {
     background-color:#D3D3D3;
     min-height: 450px;
     padding: 10px;
+    width: auto;
   }
 
   code {
