@@ -8,7 +8,7 @@ class Home extends Component
     render(){
         return(
             <div >
-                Home test    
+                Home test   POC 
 
             </div>
         );
